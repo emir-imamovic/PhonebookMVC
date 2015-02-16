@@ -8,9 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Model.Contact;
+
 public class ApplicationView extends Main {
 
-	public static void home() {
+	public static void home(Contact c) {
 		JPanel content = new JPanel();
 
 		JLabel text = new JLabel("Welcome to BitBook");
@@ -39,6 +41,11 @@ public class ApplicationView extends Main {
 		});
 		content.add(add);
 		content.add(show);
+
+		// Treba brisati
+		JLabel contactInfo = new JLabel(c.getName() + " " + c.getSurname()
+				+ " " + c.getNumber());
+		content.add(contactInfo);
 		Main.replaceContent(content);
 	}
 }
