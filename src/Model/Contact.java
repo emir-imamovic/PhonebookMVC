@@ -2,6 +2,7 @@ package Model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class Contact extends Application {
 	private int id;
@@ -15,6 +16,12 @@ public class Contact extends Application {
 		this.id = -1;
 		this.name = "Unknown";
 		this.surname = "Unknown";
+		this.number = "";
+	}
+	public Contact(int id, String name, String surname) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
 		this.number = "";
 	}
 
@@ -46,6 +53,39 @@ public class Contact extends Application {
 		}
 	}
 
+	public boolean save() {
+		String values = String.format("(?, '%s', '%s', '%s')", this.name,
+				this.surname, this.number);
+		return Application.save(tableName, values);
+	}
+
+	
+	public static Contact[] all() {
+		ResultSet rs = Application.all(tableName, "id, name, surname");
+		if(rs == null) 
+			return new Contact[0];
+		LinkedList<Contact> cl = new LinkedList<Contact>();
+		try {
+			while(rs.next()) {
+				int cId = rs.getInt("id");
+				String cName = rs.getString("name");
+				String cSurname = rs.getString("surname");
+				cl.add(new Contact(cId, cName, cSurname));
+			}
+			Contact[] all = new Contact[cl.size()];
+			cl.toArray(all);
+			return all;
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			return new Contact[0];
+		}		
+	}
+	
+	public String getDisplayName() {
+		return this.name + " " + this.surname;
+	}
+	 
+	
 	/**
 	 * @return the id
 	 */
