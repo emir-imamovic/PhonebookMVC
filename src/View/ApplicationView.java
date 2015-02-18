@@ -18,6 +18,11 @@ import Model.Contact;
 
 public class ApplicationView extends Main {
 
+	/**
+	 * In this method we set home view,
+	 * which means, when user starts the application
+	 * he will see what is in this method we made
+	 */
 	public static void home() {
 		JPanel content = new JPanel();
 
@@ -32,7 +37,9 @@ public class ApplicationView extends Main {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ApplicationController.addContact();
-
+                // this means, when "add contact" button is clicked
+				// we call method "addContact" from ApplicationController
+				// class which makes a new contact
 			}
 		});
 
@@ -41,14 +48,22 @@ public class ApplicationView extends Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.list();
+				ApplicationController.list();  
+				
+				//this means,when "show contacts" button is clicked
+				// we call the method "list" from ApplicationController 
+				//class which give to us the list of contacts we have in database
 			}
 		});
 		content.add(add);
 		content.add(show);
-		Main.replaceContent(content);
+		Main.replaceContent(content);   // here we put new content panel on main frame
 	}
 
+	/**
+	 * In this method we create all labels, buttons, text fields 
+	 * for adding a new contact
+	 */
 	public static void addContact() {
 
 		JPanel content = new JPanel();
@@ -76,8 +91,10 @@ public class ApplicationView extends Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/* back to home view */
-				ApplicationController.home();
+
+				ApplicationController.home(); 
+				// if "cancel" button is clicked we will sent
+				// back to the home view
 
 			}
 		});
@@ -87,9 +104,9 @@ public class ApplicationView extends Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*
-				 * get the data from the input and send it to create method
-				 */
+				
+		//get the data from the input and send it to "create" method in the class ApplicationController
+				 
 				String cName = nameField.getText();
 				String cSurname = surnameField.getText();
 				String cNumber = numberField.getText();
@@ -108,9 +125,16 @@ public class ApplicationView extends Main {
 		content.add(save);
 		content.add(cancel);
 
-		Main.replaceContent(content);
+		Main.replaceContent(content);  // again, set new content panel on main frame
 	}
 
+	
+	/**
+	 * In this method, we create array of buttons
+	 * on which will be contact's name and surname.
+	 * Also, we makes two more buttons, one for add contact
+	 * and other for get back on main view
+	 */
 	public static void list(Contact[] all) {
 		JPanel panel = new JPanel();
 		int buttonHeight = 50;
@@ -158,7 +182,8 @@ public class ApplicationView extends Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.addContact();
+				
+				ApplicationController.addContact(); // add new contact
 			}
 		});
 		panel.add(addContact);
@@ -167,11 +192,13 @@ public class ApplicationView extends Main {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationController.home();
+				
+				ApplicationController.home();  // send back to home view
+				
 			}
 		});
 		panel.add(back);
-		replaceContent(scrollPane);
+		replaceContent(scrollPane);  
 	}
 
 }

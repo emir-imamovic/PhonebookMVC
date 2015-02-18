@@ -11,6 +11,10 @@ public class Main {
 	protected static int windowWidth = 400;
 	protected static int windowHeight = 500;
 
+	/**
+	 * In this method we create main frame on which we'll
+	 * put content panels
+	 */
 	public static void init() {
 		window = new JFrame("BitBook");
 		window.setSize(windowWidth, windowHeight);
@@ -18,6 +22,11 @@ public class Main {
 		window.setResizable(false);
 	}
 
+	/**
+	 * In this method we validate changes on frame,
+	 * then repaint it
+	 * and then set frame visible
+	 */
 	protected static void setVisible() {
 		window.validate();
 		window.repaint();
@@ -25,6 +34,11 @@ public class Main {
 		
 	}
 
+	/**
+	 * In this method we put new contect panel on frame
+	 * and then call method "setVisible" from above so we can
+	 * make it visible
+	 */
 	protected static void replaceContent(Container panel) {
 		window.setContentPane((Container)panel);
 		setVisible();
